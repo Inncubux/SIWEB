@@ -1,0 +1,59 @@
+<!-- filepath: c:\Users\axel0\Desktop\SIWEB\SI\templates\resultados.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de Terremotos</title>
+</head>
+<body>
+    <h1>Resultados de la búsqueda</h1>
+    {% if resultados %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Latitud</th>
+                    <th>Longitud</th>
+                    <th>Profundidad (km)</th>
+                    <th>Magnitud Mw</th>
+                    <th>Magnitud mb</th>
+                    <th>Magnitud Ms</th>
+                    <th>Scalar Moment</th>
+                    <th>Strike1</th>
+                    <th>Dip1</th>
+                    <th>Slip1</th>
+                    <th>Strike2</th>
+                    <th>Dip2</th>
+                    <th>Slip2</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evento in resultados %}
+                <tr>
+                    <td>{{ evento.fecha }}</td>
+                    <td>{{ evento.hora }}</td>
+                    <td>{{ evento.latitud }}</td>
+                    <td>{{ evento.longitud }}</td>
+                    <td>{{ evento.profundidad }}</td>
+                    <td>{{ evento.magnitud_mw }}</td>
+                    <td>{{ evento.magnitud_mb }}</td>
+                    <td>{{ evento.magnitud_ms }}</td>
+                    <td>{{ evento.scalar_moment }}</td>
+                    <td>{{ evento.strike1 }}</td>
+                    <td>{{ evento.dip1 }}</td>
+                    <td>{{ evento.slip1 }}</td>
+                    <td>{{ evento.strike2 }}</td>
+                    <td>{{ evento.dip2 }}</td>
+                    <td>{{ evento.slip2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No se encontraron resultados con los parámetros seleccionados.</p>
+    {% endif %}
+    <br>
+    <a href="{% url 'buscar_terremotos' %}">Volver al filtro</a>
+</body>
+</html>

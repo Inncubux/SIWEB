@@ -1,0 +1,29 @@
+<!-- filepath: c:\Users\axel0\Desktop\SIWEB\SI\templates\buscar_terremotos.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtrar Terremotos</title>
+</head>
+<body>
+    <h1>Filtrar Terremotos</h1>
+    <form method="get" action="{% url 'resultados_terremotos' %}">
+        <label for="fecha_inicio">Fecha de inicio:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio"><br><br>
+
+        <label for="fecha_final">Fecha final:</label>
+        <input type="date" id="fecha_final" name="fecha_final"><br><br>
+
+        <label for="latitud">Latitud:</label>
+        <input type="number" step="any" id="latitud" name="latitud"><br><br>
+
+        <label for="longitud">Longitud:</label>
+        <input type="number" step="any" id="longitud" name="longitud"><br><br>
+
+        <label for="magnitud">Magnitud mínima:</label>
+        <input type="number" step="any" id="magnitud" name="magnitud"><br><br>
+
+        <button type="submit">Buscar</button>
+    </form>
+</body>
+</html>
