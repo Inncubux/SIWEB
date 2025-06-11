@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.buscar_terremotos, name='buscar_terremotos'),
     path('resultados/', views.resultados_terremotos, name='resultados_terremotos'),
+    path('descargar_excel/', views.descargar_excel, name='descargar_excel'),
 ]

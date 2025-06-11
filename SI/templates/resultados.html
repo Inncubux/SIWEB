@@ -71,6 +71,13 @@
     <br>
     <a href="{% url 'buscar_terremotos' %}">Volver al filtro</a>
 
+    <form method="get" action="{% url 'descargar_excel' %}" style="margin-bottom: 20px;">
+        {% for key, value in request.GET.items %}
+            <input type="hidden" name="{{ key }}" value="{{ value }}">
+        {% endfor %}
+        <button type="submit">Descargar Excel</button>
+    </form>
+
     <script>
         var terremotos = [
             {% for evento in resultados %}
