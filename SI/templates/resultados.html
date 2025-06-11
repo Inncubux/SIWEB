@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Resultados de Terremotos</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
     <h1>Resultados de la búsqueda</h1>
+    <div id="map" style="height: 400px; margin-bottom: 20px;"></div>
     {% if resultados %}
         <table border="1">
             <thead>
@@ -50,10 +53,57 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        <div>
+            {% if resultados.has_previous %}
+                <a href="?page={{ resultados.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Anterior</a>
+            {% endif %}
+
+            Página {{ resultados.number }} de {{ resultados.paginator.num_pages }}
+
+            {% if resultados.has_next %}
+                <a href="?page={{ resultados.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Siguiente</a>
+            {% endif %}
+        </div>
     {% else %}
         <p>No se encontraron resultados con los parámetros seleccionados.</p>
     {% endif %}
     <br>
     <a href="{% url 'buscar_terremotos' %}">Volver al filtro</a>
+
+    <script>
+        var terremotos = [
+            {% for evento in resultados %}
+                {
+                    coords: [{{ evento.latitud }}, {{ evento.longitud }}],
+                    fecha: "{{ evento.fecha }}",
+                    hora: "{{ evento.hora }}",
+                    magnitud: "{{ evento.magnitud_mw }}",
+                    profundidad: "{{ evento.profundidad }}"
+                }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ];
+        var centro = terremotos.length > 0 ? terremotos[0].coords : [0,0];
+        var map = L.map('map').setView(centro, 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        terremotos.forEach(function(evento) {
+            L.circleMarker(evento.coords, {
+                radius: 6,
+                color: 'red',
+                fillColor: 'red',
+                fillOpacity: 0.8
+            })
+            .bindTooltip(
+                "Fecha: " + evento.fecha +
+                "<br>Hora: " + evento.hora +
+                "<br>Magnitud Mw: " + evento.magnitud +
+                "<br>Profundidad: " + evento.profundidad + " km",
+                {direction: 'top'}
+            )
+            .addTo(map);
+        });
+    </script>
 </body>
 </html>

@@ -14,14 +14,23 @@
         <label for="fecha_final">Fecha final:</label>
         <input type="date" id="fecha_final" name="fecha_final"><br><br>
 
-        <label for="latitud">Latitud:</label>
-        <input type="number" step="any" id="latitud" name="latitud"><br><br>
+        <label for="latitud_min">Latitud mínima:</label>
+        <input type="number" step="any" id="latitud_min" name="latitud_min" min="-90" max="90"><br><br>
 
-        <label for="longitud">Longitud:</label>
-        <input type="number" step="any" id="longitud" name="longitud"><br><br>
+        <label for="latitud_max">Latitud máxima:</label>
+        <input type="number" step="any" id="latitud_max" name="latitud_max" min="-90" max="90"><br><br>
+
+        <label for="longitud_min">Longitud mínima:</label>
+        <input type="number" step="any" id="longitud_min" name="longitud_min" min="-180" max="180"><br><br>
+
+        <label for="longitud_max">Longitud máxima:</label>
+        <input type="number" step="any" id="longitud_max" name="longitud_max" min="-180" max="180"><br><br>
 
         <label for="magnitud">Magnitud mínima:</label>
         <input type="number" step="any" id="magnitud" name="magnitud"><br><br>
+
+        <label for="magnitud_max">Magnitud máxima:</label>
+        <input type="number" step="any" id="magnitud_max" name="magnitud_max"><br><br>
 
         <button type="submit">Buscar</button>
     </form>
